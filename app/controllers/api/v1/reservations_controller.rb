@@ -1,16 +1,18 @@
 class Api::V1::ReservationsController < ApplicationController
+  before_action :current_user
+
   def index
-    reservations = Reservation.all
+    reservations = current_user.Reservation.all
     render json: reservations
   end
 
   def show
-    reservation = Reservation.find_by(id: params[:id])
+    reservation = current_user.Reservation.find_by(id: params[:id])
     render json: reservation
   end
 
   def create
-    reservation = Reservation.new(reservation_params)
+    reservation = current_user.Reservation.new(reservation_params)
     if reservation.save
       render json: reservations
     else
@@ -19,7 +21,7 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def update
-    reservation = Reservation.find_by(id: params[:mentor_id])
+    reservation = current_user.Reservation.find_by(id: params[:mentor_id])
     if reservation.update(reservation_params)
       render json: reservation
     else
@@ -28,7 +30,7 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def destroy
-    reservation = Reservation.find_by(id: params[:mentor_id])
+    reservation = current_user.Reservation.find_by(id: params[:mentor_id])
     if reservation.destroy
       head :no_content
     else
@@ -42,7 +44,7 @@ class Api::V1::ReservationsController < ApplicationController
     params.require(:reservation).permit(:duration, :mentor_id, :user_id)
   end
 
-  # def options
-  #     @options ||= { include: %i[users, mentors]}
-  # end
+  def current_user
+    @current_user = User.find(session[:user_id]) if session[:user_id]
+  end
 end
