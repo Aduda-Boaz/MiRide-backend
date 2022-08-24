@@ -17,13 +17,18 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: dennisboaz
+  password: admin123456
+  port: 5432
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: MiRide_backend_development
+  database: MentorMe_backend_development
+  username: dennisboaz
+  password: admin123456
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +62,9 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: MiRide_backend_test
+  database: MentorMe_backend_test
+  username: dennisboaz
+  password: admin123456
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +88,6 @@ test:
 #
 production:
   <<: *default
-  database: MiRide_backend_production
-  username: MiRide_backend
-  password: <%= ENV["MIRIDE_BACKEND_DATABASE_PASSWORD"] %>
+  database: MentorMe_backend_production
+  username: dennisboaz
+  password: admin123456
