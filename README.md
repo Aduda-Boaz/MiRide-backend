@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+postgres=# CREATE USER dennisboaz WITH PASSWORD 'admin123456';
+CREATE ROLE
+postgres=# ALTER USER dennisboaz CREATEDB;
+ALTER ROLE
+postgres=#
+
